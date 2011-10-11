@@ -3,7 +3,7 @@ paths = [
 ]
 
 class Tree(object):
-    def __init__(self, node=None):
+    def __init__(self, node=0):
         self.node = node
         self.children = []
 
@@ -12,9 +12,9 @@ class Tree(object):
 
     def toList(self):
         if len(self.children) > 0:
-            return [self.node, [x.toList() for x in self.children]]
+            return "\n".join(["%i -> %i;" % (self.node, x.node)+"\n"+x.toList() for x in self.children])
         else:
-            return [self.node]
+            return ""
 
 tree = Tree()
 
@@ -39,4 +39,6 @@ for path in paths:
 
         # use the found or created leaf as a position for the next value in the path-list
 
+print "digraph G {"
 print tree.toList()
+print "}"
