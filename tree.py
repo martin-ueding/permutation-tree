@@ -2,21 +2,41 @@ paths = [
     [1, 4, 7], [1, 4, 8], [1, 4, 9], [1, 5, 7], [1, 5, 8], [1, 5, 9], [1, 6, 7], [1, 6, 8], [1, 6, 9], [2, 4, 7], [2, 4, 8], [2, 4, 9], [2, 5, 7], [2, 5, 8], [2, 5, 9], [2, 6, 7], [2, 6, 8], [2, 6, 9], [3, 4, 7], [3, 4, 8], [3, 4, 9], [3, 5, 7], [3, 5, 8], [3, 5, 9], [3, 6, 7], [3, 6, 8], [3, 6, 9]
 ]
 
-lists = [[]]*len(paths[0])
-for i in xrange(len(paths[0])):
-    lists[i] = set([])
-    for l in paths:
-        lists[i].add(l[i])
+class Tree(object):
+    def __init__(self, node=None):
+        self.node = node
+        self.children = []
 
-def iterate(listnumber):
-    result = []
-    for element in lists[listnumber]:
-        if listnumber < len(lists)-1:
-            result.append([element, iterate(listnumber+1)])
+    def addChild(self, child):
+        self.children.append(child)
+
+    def toList(self):
+        if len(self.children) > 0:
+            return [self.node, [x.toList() for x in self.children]]
         else:
-            result.append([element])
-    return result
+            return [self.node]
 
-tree = iterate(0)
+tree = Tree()
 
-print tree
+# iterate through the lists
+for path in paths:
+    subtree = tree
+
+    for value in path:
+        # check whether the current value already exists at this position in the tree
+        found = False
+        for child in subtree.children:
+            if value == child.node:
+                subtree = child
+                found = True
+                break
+
+        # attach the leaf to the current position in the tree if needed
+        if not found:
+            newchild = Tree(node=value)
+            subtree.addChild(newchild)
+            subtree = newchild
+
+        # use the found or created leaf as a position for the next value in the path-list
+
+print tree.toList()
