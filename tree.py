@@ -4,13 +4,13 @@ lists = [
     [7, 8, 9]
 ]
 
-def iterate(listnumber):
-    result = []
+def iterate(listnumber, level=0):
     for element in lists[listnumber]:
+        print "  "*level,
         if listnumber < len(lists)-1:
-            result.append([element, iterate(listnumber+1)])
+            print element
+            iterate(listnumber+1, level+1)
         else:
-            result.append([element])
-    return result
+            print element
 
-print iterate(0)
+iterate(0)
