@@ -1,3 +1,14 @@
+#!/usr/bin/python
+# Copyright (c) 2011 Martin Ueding <dev@martin-ueding.de>
+
+"""
+Builds up a tree from item lists and prints all possible traverse paths.
+
+Initiated by a question on stack overflow.
+
+http://stackoverflow.com/questions/7727007/creating-a-tree-from-a-list-of-item-combinations/7727374#7727374
+"""
+
 paths = [
     [1, 4, 7], [1, 4, 8], [1, 4, 9], [1, 5, 7], [1, 5, 8], [1, 5, 9], [1, 6, 7], [1, 6, 8], [1, 6, 9], [2, 4, 7], [2, 4, 8], [2, 4, 9], [2, 5, 7], [2, 5, 8], [2, 5, 9], [2, 6, 7], [2, 6, 8], [2, 6, 9], [3, 4, 7], [3, 4, 8], [3, 4, 9], [3, 5, 7], [3, 5, 8], [3, 5, 9], [3, 6, 7], [3, 6, 8], [3, 6, 9]
 ]
